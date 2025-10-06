@@ -6,7 +6,15 @@ on:
   pull_request:
 
 jobs:
+  set-terraform-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Terraform variables
+        run: |
+          echo 'role_name = "test-role"' > terraform.tfvars
+          echo 'role_policies = []' >> terraform.tfvars
   tf-test:
     uses: ZhangMaKe/workflow-library/.github/workflows/terraform-test.yml@main
     with:
       scan-ref: '.'
+  
