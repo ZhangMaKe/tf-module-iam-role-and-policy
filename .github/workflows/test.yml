@@ -12,7 +12,13 @@ jobs:
       - name: Set Terraform variables
         run: |
           echo 'role_name = "test-role"' > terraform.tfvars
-          echo 'role_policies = []' >> terraform.tfvars
+          echo 'role_policies = [
+            {
+              name      = "test-policy"
+              actions   = ["dynamodb:GetItem"]
+              resources = ["arn:aws:dynamodb:us-east-1:123456789012:table/test-table"]
+            }
+          ]' >> terraform.tfvars
   tf-test:
     uses: ZhangMaKe/workflow-library/.github/workflows/terraform-test.yml@main
     with:
