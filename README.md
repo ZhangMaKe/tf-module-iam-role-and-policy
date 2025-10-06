@@ -1,3 +1,5 @@
+[![Terraform Tests](https://github.com/ZhangMaKe/tf-module-iam-role-and-policy/actions/workflows/test.yml/badge.svg)](https://github.com/ZhangMaKe/tf-module-iam-role-and-policy/actions/workflows/test.yml)
+
 # IAM Role and Policies Terraform Module
 
 This Terraform module creates an AWS IAM role and attaches custom policies to it. It is designed to be reusable and configurable for different AWS services and permission sets.
