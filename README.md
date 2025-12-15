@@ -2,13 +2,14 @@
 
 # IAM Role and Policies Terraform Module
 
-This Terraform module creates an AWS IAM role and attaches custom policies to it. It is designed to be reusable and configurable for different AWS services and permission sets.
+This Terraform module creates an AWS IAM role and attaches custom and existing policies to it. It is designed to be reusable and configurable for different AWS services and permission sets.
 
 ## Features
 - Creates an IAM role with a specified name
 - Allows specifying the AWS service that will assume the role (e.g., Lambda, EC2)
 - Attaches one or more custom policies to the role
-- Each policy can define allowed actions and resource ARNs
+- Each policy can define allowed actions and resource ARNs.
+- Attaches any IAM policies provided in input variable `precreated_policy_arns` to the created role.
 
 ## Usage
 
@@ -25,6 +26,7 @@ module "iam_role_and_policies" {
       resources = ["arn:aws:dynamodb:us-east-1:123456789012:table/example-table"]
     }
   ]
+  precreated_policy_arns = ["arn:aws:iam::12345:policy/dynamo-read-policy", "arn:aws:iam::12345:policy/dynamo-write-policy"]
 }
 ```
 
@@ -35,6 +37,7 @@ module "iam_role_and_policies" {
 | `role_name`           | `string`     | The name of the IAM role to create                                          | n/a                      |
 | `service_assuming_role` | `string`   | The AWS service domain that will assume the role (e.g., `lambda.amazonaws.com`) | `lambda.amazonaws.com`   |
 | `role_policies`       | `list(object)` | List of policy objects, each with `name`, `actions`, and `resources` fields | n/a                      |
+| `precreated_policy_arns` | `list(string)` | A list of existing IAM policy ARNs to attach to the role. | [] |
 
 ## Example Policy Object
 ```hcl
