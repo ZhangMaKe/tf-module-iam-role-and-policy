@@ -26,7 +26,7 @@ module "iam_role_and_policies" {
       resources = ["arn:aws:dynamodb:us-east-1:123456789012:table/example-table"]
     }
   ]
-  precreated_policy_arns = ["arn:aws:iam::12345:policy/dynamo-read-policy", "arn:aws:iam::12345:policy/dynamo-write-policy"]
+  precreated_policy_arns = [dynamo_read_policy = "arn:aws:iam::12345:policy/dynamo-read-policy", dynamo_write_policy = "arn:aws:iam::12345:policy/dynamo-write-policy"]
 }
 ```
 
@@ -37,7 +37,7 @@ module "iam_role_and_policies" {
 | `role_name`           | `string`     | The name of the IAM role to create                                          | n/a                      |
 | `service_assuming_role` | `string`   | The AWS service domain that will assume the role (e.g., `lambda.amazonaws.com`) | `lambda.amazonaws.com`   |
 | `role_policies`       | `list(object)` | List of policy objects, each with `name`, `actions`, and `resources` fields | n/a                      |
-| `precreated_policy_arns` | `list(string)` | A list of existing IAM policy ARNs to attach to the role. | [] |
+| `precreated_policy_arns` | `map(string)` | A map of existing IAM policy ARNs and identifiers to attach to the role. | [] |
 
 ## Example Policy Object
 ```hcl
