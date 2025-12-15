@@ -22,7 +22,7 @@ resource "aws_iam_role_policy_attachment" "role_policy_attachment" {
 }
 
 resource "aws_iam_role_policy_attachment" "precreated_policy_attachments" {
-  for_each = toset(var.precreated_policy_arns)
+  for_each = var.precreated_policy_arns
 
   role = aws_iam_role.role.id
   policy_arn = each.value
