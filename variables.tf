@@ -17,3 +17,9 @@ variable "role_policies" {
     resources = list(string)
   }))
 }
+
+variable "precreated_policy_arns" {
+  description = "A list of existing IAM policy ARNs to attach to the role."
+  type = list(string)
+  default = []
+}
